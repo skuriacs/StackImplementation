@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 class Stack_LL
 {
 	struct Node
@@ -39,13 +40,13 @@ Stack_LL::Stack_LL()
 
 Stack_LL::~Stack_LL()
 {
-	/* Node *temp = topPtr;
+	Node *temp = topPtr;
 	while (temp != nullptr)
 	{
 		Node *deleted = temp;
 		temp = temp->next;
 		delete deleted;
-	}*/
+	}
 }
 
 bool Stack_LL::isEmpty() const
@@ -73,6 +74,11 @@ void Stack_LL::push(int newItem)
 
 void Stack_LL::pop()
 {
+	if (topPtr->next = nullptr)
+	{
+		delete topPtr;
+		return;
+	}
 	Node *temp = topPtr;
 	while (temp->next->next != nullptr)
 		temp = temp->next;
@@ -103,13 +109,33 @@ void Stack_LL::print()
 		temp = temp->next;
 	}
 }
+bool inLanguage(const char *theString)
+{
+	std::stack<char> s;
+	while (*theString != '\0')
+	{
+		s.push(*theString);
+		theString++;
+	}
+	int aCount = 0;
+	int bCount = 0;
+	while (!s.empty())
+	{
+		char temp = s.top();
+		std::cout << temp;
+		if (temp != 'A' && temp != 'B')
+			return false;
+		if (temp == 'A')
+			aCount++;
+		else
+			bCount++;
+		s.pop();
+	}
+	std::cout << aCount << bCount;
+	return aCount == bCount;
+}
 int main()
 {
-	Stack_LL list;
-	list.push(5);
-	list.push(6);
-	list.push(12);
-	list.print();
-	std::cout << list.peek();
-	std::cin.get();
+	const char *x = "ABBA";
+	std::cout << inLanguage(x);
 }
