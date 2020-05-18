@@ -4,13 +4,13 @@ class Stack_LL
 	struct Node
 	{
 		int data;
-		Node* next;
+		Node *next;
 		Node(int val)
 		{
 			data = val;
 			next = nullptr;
 		}
-		Node(int val, Node* node)
+		Node(int val, Node *node)
 		{
 			data = val;
 			next = node;
@@ -19,7 +19,7 @@ class Stack_LL
 
 private:
 	// topPtr points to the top element of the stack
-	Node* topPtr;
+	Node *topPtr;
 
 public:
 	Stack_LL();
@@ -59,11 +59,11 @@ void Stack_LL::push(int newItem)
 {
 	if (topPtr == nullptr)
 	{
-		Node* node = new Node(newItem);
+		Node *node = new Node(newItem);
 		topPtr = node;
 		return;
 	}
-	Node* temp = topPtr;
+	Node *temp = topPtr;
 	while (temp->next != nullptr)
 	{
 		temp = temp->next;
@@ -73,14 +73,22 @@ void Stack_LL::push(int newItem)
 
 void Stack_LL::pop()
 {
-	Node* temp = topPtr;
-	topPtr = topPtr->next;
-	delete temp;
+	Node *temp = topPtr;
+	while (temp->next->next != nullptr)
+		temp = temp->next;
+	Node *deleted = temp->next;
+	temp->next = nullptr;
+	delete deleted;
 }
 
 int Stack_LL::peek() const
 {
-	return topPtr->data;
+	Node *temp = topPtr;
+	while (temp->next != nullptr)
+	{
+		temp = temp->next;
+	}
+	return temp->data;
 }
 void Stack_LL::print()
 {
@@ -88,7 +96,7 @@ void Stack_LL::print()
 	{
 		return;
 	}
-	Node* temp = topPtr;
+	Node *temp = topPtr;
 	while (temp != nullptr)
 	{
 		std::cout << temp->data << "\n";
